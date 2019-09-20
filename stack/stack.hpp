@@ -13,7 +13,7 @@ namespace structures {
 template <typename T>
 class stack {
  public:
-  stack(){
+  stack() {
     _capacity = __DEFAULT_CAPACITY;
     _size = __INITIAL_SIZE;
     _stack = new T[_capacity];
