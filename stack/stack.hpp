@@ -27,8 +27,8 @@ class stack {
     if (this == &source)
       return *this;
     else {
-      this->empty();
       this->resize(source._capacity);
+      this->empty();
       this->_size = source._size;
       std::memcpy(this->_stack, source._stack, _size * sizeof(source._stack));
     }
@@ -43,7 +43,7 @@ class stack {
     _size--;
   }
   void push(T element) {
-    if (_size == _capacity) grow();
+    if (_size == _capacity) resize(_size * e);
     _stack[_size++] = element;
   }
   T top() const {
@@ -53,18 +53,12 @@ class stack {
   }
   bool is_empty() const { return _size <= __INITIAL_SIZE; }
   void empty() { _size = 0; }
-  void grow() {
-    int _capacity_old = _capacity;
-    _capacity *= e;
-    T* _stack2 = new T[_capacity];
-    std::memcpy(_stack2, _stack, _capacity_old * sizeof(*_stack));
-    delete[] _stack;
-    _stack = _stack2;
-  }
   void resize(int __capacity_new) {
-    delete[] _stack;
     _capacity = __capacity_new;
-    _stack = new T[_capacity];
+    T* _stack_alloc = new T[_capacity];
+    std::memcpy(_stack_alloc, _stack, _size * sizeof(*_stack));
+    delete[] _stack;
+    _stack = _stack_alloc;
   }
 
  private:
