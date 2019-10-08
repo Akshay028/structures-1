@@ -5,6 +5,8 @@ int main() {
   s.append(5);
   s.append(50);
   s.append(500);
+  s.prepend(4);
+  s.insert(501, 500);
   s.print();
   s.remove(500);
   s.print();
@@ -26,6 +28,7 @@ int main() {
   for (int i = 0; i < 30; i += 2) {
     s.append(i);
   }
+  s.insert(50001, 22);
   s.print();
   return 0;
 }
