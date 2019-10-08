@@ -63,7 +63,7 @@ class stack {
 
  private:
   T* _stack;
-  int _capacity, _size;
+  unsigned int _capacity, _size;
 };
 }  // namespace structures
 #endif /* end of include guard STACK_HPP */
