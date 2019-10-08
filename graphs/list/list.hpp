@@ -12,13 +12,20 @@ class list {
     _head = new list_node<T>();
     _tail = new list_node<T>();
     _head->_next = _tail;
-    _tail->_next = nullptr;
-    _head->_previous = nullptr;
     _tail->_previous = _head;
-    _size = 0;
   }
-  ~list() {}
-  bool is_empty() const { return _size; }
+  ~list() {
+    list_node<T> *current_node = _head->_next;
+    while (current_node != _tail) {
+      current_node = current_node->_next;
+      delete current_node->_previous;
+    }
+    delete _head;
+    delete _tail;
+  }
+  bool is_empty() const {
+    return _head->_next == _tail && _tail->_previous == _head;
+  }
   void append(T data) {
     list_node<T> *insert_node = new list_node<T>(data);
     insert_node->_previous = _tail->_previous;
@@ -28,7 +35,7 @@ class list {
   }
   list_node<T> *find(T data) {
     list_node<T> *found_node = _head->_next;
-    while (found_node->_data != data && found_node->_next != _tail) {
+    while (found_node != _tail && found_node->_data != data) {
       found_node = found_node->_next;
     }
     return found_node;
@@ -41,10 +48,10 @@ class list {
     delete remove_node;
     return true;
   }
-  void print(){
+  void print() {
     list_node<T> *current_node = _head->_next;
     std::cout << "[ ";
-    while(current_node != _tail){
+    while (current_node != _tail) {
       std::cout << current_node->_data << " ";
       current_node = current_node->_next;
     }
@@ -53,7 +60,6 @@ class list {
 
  private:
   structures::list_node<T> *_head, *_tail;
-  unsigned int _size;
 };
 }  // namespace structures
 
