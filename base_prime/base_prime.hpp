@@ -32,12 +32,9 @@ class base_prime {
     double value = 1;
     for (int i = 0; i < _max; i++) {
       double base_i = pow(prime_base[i], _n[i]);
-      if(base_i>1){
-        value*=base_i;
+      if (base_i > 1) {
+        value *= base_i;
       }
-      //if(base_i != 1) value+=base_i;
-      //std::cout << prime_base[i] << "^" << _n[i] << " ";
-      //std::cout << " " << _n[i] << " ";
     }
     std::cout << "Value of n: " << value << '\n';
   }
